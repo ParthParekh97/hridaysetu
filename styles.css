@@ -251,6 +251,11 @@ img { max-width: 100%; }
   padding: 8rem 2rem 4rem;
   max-width: 800px;
 }
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+.hero-text-col { position: relative; z-index: 2; }
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -748,6 +753,144 @@ img { max-width: 100%; }
   color: rgba(255,255,255,0.6);
   font-size: 1.75rem;
   cursor: pointer;
+}
+
+/* ─── IMAGE PLACEHOLDERS ─── */
+.img-placeholder {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(232,98,26,0.07), rgba(197,150,12,0.07));
+  border: 2px dashed rgba(232,98,26,0.35);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.img-placeholder .ph-symbol {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+.img-placeholder .ph-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--saffron);
+}
+.img-placeholder .ph-guide {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 240px;
+}
+.img-placeholder .ph-size {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(200,100,20,0.5);
+  text-transform: uppercase;
+  background: rgba(232,98,26,0.08);
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  margin-top: 0.25rem;
+}
+/* dark variant (for dark-bg sections) */
+.img-placeholder.dark {
+  background: rgba(245,200,66,0.05);
+  border-color: rgba(245,200,66,0.25);
+}
+.img-placeholder.dark .ph-title { color: var(--gold-bright); }
+.img-placeholder.dark .ph-guide { color: rgba(255,255,255,0.55); }
+.img-placeholder.dark .ph-size { color: rgba(245,200,66,0.45); background: rgba(245,200,66,0.08); }
+
+/* ─── HERO IMAGE PANEL ─── */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  text-align: left;
+  max-width: 1100px;
+  padding: 8rem 2rem 4rem;
+}
+.hero-image-col .img-placeholder { min-height: 420px; }
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+  .hero-actions { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-image-col .img-placeholder { min-height: 260px; }
+}
+
+/* ─── ABOUT WITH IMAGE ─── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+.about-image-col .img-placeholder { min-height: 380px; }
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+/* ─── EVENT CARD IMAGE ─── */
+.event-card .img-placeholder { min-height: 160px; margin-bottom: 1.25rem; }
+.event-card.large .img-placeholder { min-height: 200px; }
+
+/* ─── GALLERY SECTION ─── */
+.gallery {
+  padding: 7rem 0;
+  background: var(--deep);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.gallery-item .img-placeholder.dark { min-height: 220px; }
+.gallery-item.tall .img-placeholder.dark { min-height: 460px; }
+.gallery-item.wide { grid-column: span 2; }
+.gallery-caption {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+}
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item.wide { grid-column: 1 / -1; }
+  .gallery-item.tall .img-placeholder.dark { min-height: 260px; }
+}
+@media (max-width: 600px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item.wide, .gallery-item.tall { grid-column: 1; }
+}
+
+/* ─── MATRIMONY IMAGE ─── */
+.matrimony-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+.matrimony-image-col .img-placeholder.dark { min-height: 400px; }
+@media (max-width: 900px) {
+  .matrimony-grid { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
 }
 
 /* ─── FORM SUCCESS MESSAGE ─── */
