@@ -591,6 +591,43 @@ img{max-width:100%;display:block;}
 }
 .wa-float:hover .wa-tooltip{opacity:1;}
 
+/* ─── COUPLE SCROLL PROGRESS ─── */
+.couple-progress{
+  position:fixed;bottom:0;left:0;right:0;
+  height:140px;pointer-events:none;z-index:50;overflow:visible;
+}
+.cp-figure{
+  position:absolute;bottom:0;
+}
+.cp-bride{left:0;}
+.cp-groom{right:0;}
+@keyframes cp-walk{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+.cp-figure.walking{animation:cp-walk 0.55s ease-in-out infinite;}
+.cp-garland{position:absolute;opacity:0;transition:opacity 0.6s ease;}
+.cp-garland-bride{right:-46px;top:58px;}
+.cp-garland-groom{left:-46px;top:62px;}
+.cp-meet{
+  position:absolute;bottom:148px;left:50%;
+  transform:translateX(-50%) scale(0);
+  opacity:0;text-align:center;
+  transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.cp-meet.show{opacity:1;transform:translateX(-50%) scale(1);}
+.cp-meet-heart{
+  display:block;font-size:2.5rem;color:#e74c3c;
+  animation:cp-heartbeat 0.8s ease-in-out infinite;
+}
+.cp-meet-text{
+  display:block;font-family:'Playfair Display',serif;
+  font-size:0.9rem;font-weight:700;color:#d4a520;
+  letter-spacing:0.12em;text-shadow:0 2px 8px rgba(0,0,0,0.5);
+  margin-top:0.2rem;
+}
+@keyframes cp-heartbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:1024px){
   .why-grid{grid-template-columns:1fr;}

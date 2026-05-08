@@ -150,6 +150,43 @@ if (form) {
   });
 }
 
+/* COUPLE SCROLL PROGRESS */
+(function () {
+  const bride = document.getElementById('cpBride');
+  const groom = document.getElementById('cpGroom');
+  const meetEl = document.getElementById('cpMeet');
+  if (!bride || !groom) return;
+  const garlandBride = bride.querySelector('.cp-garland-bride');
+  const garlandGroom = groom.querySelector('.cp-garland-groom');
+  const FIG_W = 72;
+
+  function updateCouple() {
+    const scrollTop = window.scrollY;
+    const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    const pct = Math.min(scrollTop / maxScroll, 1);
+
+    const maxTravel = Math.max(0, window.innerWidth / 2 - FIG_W);
+    const travel = maxTravel * pct;
+
+    bride.style.left = travel + 'px';
+    groom.style.right = travel + 'px';
+
+    const isWalking = pct > 0.01 && pct < 0.97;
+    bride.classList.toggle('walking', isWalking);
+    groom.classList.toggle('walking', isWalking);
+
+    const garlandOp = pct >= 0.6 ? Math.min((pct - 0.6) / 0.08, 1) : 0;
+    if (garlandBride) garlandBride.style.opacity = garlandOp;
+    if (garlandGroom) garlandGroom.style.opacity = garlandOp;
+
+    if (meetEl) meetEl.classList.toggle('show', pct >= 0.97);
+  }
+
+  window.addEventListener('scroll', updateCouple, { passive: true });
+  window.addEventListener('resize', updateCouple, { passive: true });
+  updateCouple();
+})();
+
 /* CARD HOVER TILT */
 document.querySelectorAll('.why-card,.service-card,.about-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
