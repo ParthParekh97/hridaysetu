@@ -346,11 +346,22 @@ img{max-width:100%;display:block;}
   transition:var(--transition);
 }
 .process-step.active{border:2px solid var(--maroon);}
-.process-step:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);}
+.process-step:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 48px rgba(123,26,26,0.25);
+  background:var(--maroon);
+}
+.process-step:hover .step-label{color:rgba(255,255,255,0.6);}
+.process-step:hover h3{color:#fff;}
+.process-step:hover p{color:rgba(255,255,255,0.75);}
+.process-step:hover .step-line{background:rgba(255,255,255,0.4);}
+.process-step:hover .step-circle{background:rgba(255,255,255,0.15);color:#fff;}
+.process-step:hover .step-arrow{color:rgba(255,255,255,0.25);}
 .step-circle{
   width:56px;height:56px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   font-size:1.3rem;margin:0 auto 0.5rem;color:#fff;
+  transition:var(--transition);
 }
 .step-circle.gold{background:var(--gold);}
 .step-circle.maroon{background:var(--maroon);}
@@ -359,22 +370,26 @@ img{max-width:100%;display:block;}
   transform:translateY(-50%);
   font-size:1.5rem;color:rgba(123,26,26,0.25);
   font-weight:300;z-index:1;
+  transition:var(--transition);
 }
 .process-step:last-child .step-arrow{display:none;}
 .step-label{
   font-size:0.65rem;font-weight:700;letter-spacing:0.15em;
   color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;
+  transition:var(--transition);
 }
 .process-step h3{
   font-family:'Playfair Display',serif;font-size:1.1rem;
   color:var(--maroon);margin-bottom:0.4rem;
+  transition:var(--transition);
 }
 .step-line{
   width:30px;height:2px;
   background:var(--gold);margin:0.5rem auto 0.75rem;border-radius:2px;
+  transition:var(--transition);
 }
 .step-line.maroon{background:var(--maroon);}
-.process-step p{color:var(--text-muted);font-size:0.82rem;line-height:1.65;}
+.process-step p{color:var(--text-muted);font-size:0.82rem;line-height:1.65;transition:var(--transition);}
 .process-note{
   text-align:center;font-style:italic;
   color:var(--text-muted);font-size:0.88rem;
