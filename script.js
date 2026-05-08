@@ -1,10 +1,12 @@
 'use strict';
 
+/* NAVBAR */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
+/* MOBILE NAV */
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.createElement('nav');
 mobileNav.className = 'mobile-nav';
@@ -23,8 +25,9 @@ hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
 closeBtn.addEventListener('click', () => mobileNav.classList.remove('open'));
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
+/* REVEAL ON SCROLL */
 const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
+  entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
       const delay = Array.from(entry.target.parentElement?.children || []).indexOf(entry.target) * 80;
       setTimeout(() => entry.target.classList.add('visible'), Math.min(delay, 400));
@@ -34,6 +37,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+/* COUNTER ANIMATION */
 function animateCounter(el) {
   const target = parseInt(el.dataset.target, 10);
   const duration = 1600;
@@ -56,6 +60,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.hstat-num, .bstat-num').forEach(c => counterObserver.observe(c));
 
+/* GALLERY FILTER */
 const filterBtns = document.querySelectorAll('.gf-btn');
 const galleryItems = document.querySelectorAll('.g-item');
 filterBtns.forEach(btn => {
@@ -64,11 +69,13 @@ filterBtns.forEach(btn => {
     btn.classList.add('active');
     const filter = btn.dataset.filter;
     galleryItems.forEach(item => {
-      item.classList.toggle('hidden', filter !== 'all' && item.dataset.category !== filter);
+      const match = filter === 'all' || item.dataset.category === filter;
+      item.classList.toggle('hidden', !match);
     });
   });
 });
 
+/* TESTIMONIALS CAROUSEL */
 const inner = document.getElementById('testimonialsInner');
 const prevBtn = document.getElementById('tPrev');
 const nextBtn = document.getElementById('tNext');
@@ -91,6 +98,7 @@ if (inner && prevBtn && nextBtn) {
   window.addEventListener('resize', () => goTo(0), { passive: true });
 }
 
+/* ACTIVE NAV HIGHLIGHT */
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 const sectionObserver = new IntersectionObserver((entries) => {
@@ -104,6 +112,7 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 sections.forEach(s => sectionObserver.observe(s));
 
+/* CONTACT FORM */
 const form = document.getElementById('contactForm');
 if (form) {
   form.addEventListener('submit', (e) => {
@@ -112,11 +121,19 @@ if (form) {
     btn.textContent = 'Sending...';
     btn.disabled = true;
     setTimeout(() => {
-      form.innerHTML = `<div class="form-success" style="display:flex"><div class="s-icon">🙏</div><h3>Jai Jinendra!</h3><p>Your message has been received. Our team will connect with you shortly.</p><p style="color:var(--gold-bright);font-size:0.85rem">।। जय जिनेन्द्र ।।</p></div>`;
+      form.innerHTML = `
+        <div class="form-success" style="display:flex">
+          <div class="s-icon">🙏</div>
+          <h3>Jai Jinendra!</h3>
+          <p>Your message has been received. Our team will connect with you shortly.</p>
+          <p style="color:var(--gold-bright);font-size:0.85rem">।। जय जिनेन्द्र ।।</p>
+        </div>
+      `;
     }, 1200);
   });
 }
 
+/* CARD HOVER TILT */
 document.querySelectorAll('.why-card,.service-card,.about-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
