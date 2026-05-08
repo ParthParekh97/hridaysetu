@@ -113,7 +113,7 @@ const sectionObserver = new IntersectionObserver((entries) => {
 sections.forEach(s => sectionObserver.observe(s));
 
 /* CONTACT FORM */
-const FORMSPREE_URL = 'https://formspree.io/f/xabcdefg';
+const FORMSPREE_URL = 'https://formspree.io/f/mykonelo';
 const form = document.getElementById('contactForm');
 if (form) {
   form.addEventListener('submit', async (e) => {
