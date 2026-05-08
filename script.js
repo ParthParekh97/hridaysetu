@@ -113,14 +113,25 @@ const sectionObserver = new IntersectionObserver((entries) => {
 sections.forEach(s => sectionObserver.observe(s));
 
 /* CONTACT FORM */
+const FORMSPREE_URL = 'https://formspree.io/f/xabcdefg';
 const form = document.getElementById('contactForm');
 if (form) {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending...';
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = 'Sending...';
     btn.disabled = true;
-    setTimeout(() => {
+    const errEl = form.querySelector('.form-error');
+    if (errEl) errEl.remove();
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error();
       form.innerHTML = `
         <div class="form-success" style="display:flex">
           <div class="s-icon">🙏</div>
@@ -129,7 +140,13 @@ if (form) {
           <p style="color:var(--gold-bright);font-size:0.85rem">।। जय जिनेन्द्र ।।</p>
         </div>
       `;
-    }, 1200);
+    } catch {
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+      btn.insertAdjacentHTML('afterend',
+        '<p class="form-error" style="color:#ff8a8a;font-size:0.82rem;margin-top:0.5rem">Something went wrong. Please try again or WhatsApp us directly.</p>'
+      );
+    }
   });
 }
 
